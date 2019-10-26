@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- from="text" -->
+<!-- 必填 source必须是存在的目录或者文件，可以多级目录扫描 -->
+<!-- 可选(默认英文逗号) text-from-split输入数据的分隔符 -->
+<!--
+    可选(默认false) text-has-from-heads true/flase 为true表示输入数据第一行为字段名，false或不写表示第一行开始就是数据
+    注意：如果为true，建议value统一写字段名，注意value值不要有重复
+    如果为false，建议统一写列索引值，目前两种情况会兼容
+-->
+
+<!-- to="text" -->
+<!-- 必填 target必须是目录或者文件，如果不存在且后缀有'/'则会创建目录，最后以batch数据量生成一个text文件 -->
+<!-- 可选(默认英文逗号) text-to-split输出数据的分隔符 -->
+<!--
+    可选(默认false) text-has-to-heads true/flase 为true表示输出数据第一行为字段名，false或不写表示第一行开始就是数据
+    注意：如果为true，建议name统一写字段名，写列索引值会作为字段名，注意name值不要有重复
+    如果为false，必须统一写列索引值，注意数字不要有间隔，否则以空值输出
+-->
+
+<!-- Field标签属性 -->
+<!-- name属性表示输出text列名或者列索引 -->
+<!-- value属性表示输入text列名或者列索引 -->
+<!-- 注意text文本输出都用string，这里type属性无效 -->
+<Mapping from="text" to="text" source="src/test/resources/text/1/input.txt" target="src/test/resources/text/1/output">
+    <Field name="0" value="0"></Field>
+    <Field name="1" value="1"></Field>
+    <Field name="2" value="2"></Field>
+</Mapping>

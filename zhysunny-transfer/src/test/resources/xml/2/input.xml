@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property key="property1">
+        <name>name1</name>
+        <value>value1</value>
+    </property>
+    <property key="property2">
+        <name>name2</name>
+        <value>value2</value>
+    </property>
+    <property key="property3">
+        <name>name3</name>
+        <value>value3</value>
+    </property>
+</configuration>

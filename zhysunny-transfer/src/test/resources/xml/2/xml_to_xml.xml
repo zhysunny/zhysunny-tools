@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xml结构较多，兼容性较差，不推荐使用 -->
+
+<!-- from="xml" -->
+<!-- 必填 source必须是存在的目录或者文件，目录的话会扫描所有xml文件，可以多级目录扫描 -->
+<!--
+    可选 xml-from-data-node表示从哪个节点开始作为单个数据，
+    root节点可以省略，多级节点用'.'分割，如果为空，则表示一个xml一条记录
+-->
+
+<!-- to="xml" -->
+<!-- 必填 target必须是目录或者文件，如果不存在且后缀有'/'则会创建目录，最后以batch数据量生成一个xml文件 -->
+<!-- 必填 xml-root-name表示root节点的名字 -->
+<!--
+    可选 xml-to-data-node表示从哪个节点开始作为单个数据，
+    root节点可以省略，多级节点用'.'分割，如果为空，则表示一个xml一条记录
+    如果不为空，那么Field属性name值只填xml-to-data-node以下的节点即可
+-->
+
+<!-- Field标签有3个属性 -->
+<!-- name属性表示输出节点名 -->
+<!-- value属性表示输入节点名 -->
+<!-- type只有输出时有用，针对xml有属性和文本，默认是属性，text表示文本 -->
+<Mapping from="xml" to="xml" source="src/test/resources/xml/2/input.xml" target="src/test/resources/xml/2/output"
+         xml-from-data-node="property" xml-to-data-node="property" xml-root-name="Test">
+    <Field name="key" value="property.key"></Field>
+    <Field name="name" value="property.name" type="text"></Field>
+    <Field name="value" value="property.value" type="text"></Field>
+</Mapping>

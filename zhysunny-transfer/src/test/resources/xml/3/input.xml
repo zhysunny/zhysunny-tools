@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Topics name="Topics">
+    <Topic name="COMMON">
+        <Filter>
+            <Column key="content1" value="\u62A5\u6848"/>
+        </Filter>
+        <Translate>
+            <Column name="insuranceType" key="insurance" value="insuranceType"/>
+        </Translate>
+        <Column>Text</Column>
+    </Topic>
+    <Topic name="COMMON">
+        <Filter>
+            <Column key="content2" value="\u62A5\u6848"/>
+        </Filter>
+        <Translate>
+            <Column name="insuranceType" key="insurance" value="insuranceType"/>
+        </Translate>
+        <Column>Text</Column>
+    </Topic>
+    <Topic name="COMMON">
+        <Filter>
+            <Column key="content3" value="\u62A5\u6848"/>
+        </Filter>
+        <Translate>
+            <Column name="insuranceType" key="insurance" value="insuranceType"/>
+        </Translate>
+        <Column>Text</Column>
+    </Topic>
+</Topics>
