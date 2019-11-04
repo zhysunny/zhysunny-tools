@@ -7,7 +7,7 @@
     <groupId>com.zhysunny</groupId>
     <artifactId>zhysunny-tools</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <modules>
         <module>zhysunny-shell</module>
         <module>zhysunny-transfer</module>
