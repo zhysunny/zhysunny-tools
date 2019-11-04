@@ -1,8 +1,8 @@
 package com.zhysunny.transfer;
 
 import com.zhysunny.transfer.mapping.Mapping;
-import com.zhysunny.transfer.xml.XmlDataInput;
-import com.zhysunny.transfer.xml.XmlDataOutput;
+import com.zhysunny.transfer.component.xml.XmlDataInput;
+import com.zhysunny.transfer.component.xml.XmlDataOutput;
 
 /**
  * 输入输出工厂类

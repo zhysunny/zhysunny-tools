@@ -33,7 +33,7 @@ public class TaskConstants implements PropertiesConstant {
     /**
      * 数据转换方式，默认不转换
      */
-    @PropKey(key = "transform.way", defaultValue = "com.zhysunny.transfer.NoneTransform")
+    @PropKey(key = "transform.way", defaultValue = "com.zhysunny.transfer.transform.NoneTransform")
     public static String TRANSFER_WAY;
 
 }
