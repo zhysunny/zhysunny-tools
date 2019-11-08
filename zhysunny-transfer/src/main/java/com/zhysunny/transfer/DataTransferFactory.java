@@ -13,12 +13,12 @@ public class DataTransferFactory {
 
     public static DataInput getDataInput(Mapping mapping) {
         if ("xml".equalsIgnoreCase(mapping.getFrom())) {
-            return new XmlDataInput(mapping, getDataOutput(mapping));
+            return new XmlDataInput(mapping);
         }
         return null;
     }
 
-    private static DataOutput getDataOutput(Mapping mapping) {
+    public static DataOutput getDataOutput(Mapping mapping) {
         if ("xml".equalsIgnoreCase(mapping.getFrom())) {
             return new XmlDataOutput(mapping);
         }

@@ -1,13 +1,17 @@
 package com.zhysunny.transfer;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.properties.PropertiesReader;
 import com.zhysunny.io.xml.XmlReader;
 import com.zhysunny.transfer.mapping.Mapping;
+import com.zhysunny.transfer.thread.ShutdownHookThread;
 import com.zhysunny.transfer.util.TaskConstants;
 import com.zhysunny.transfer.util.ThreadPoolUtil;
+import com.zhysunny.transfer.thread.TransferThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
+import java.util.List;
 
 /**
  * 数据转移主函数
@@ -29,6 +33,8 @@ public class DataBaseTransfer {
             System.err.println("任务配置文件");
             System.exit(1);
         }
+        // 程序终止时的操作
+        Runtime.getRuntime().addShutdownHook(new ShutdownHookThread());
         // 读取任务配置文件，一般是properties文件
         File file = new File(args[0]);
         if (!file.exists()) {
@@ -56,12 +62,33 @@ public class DataBaseTransfer {
         LOGGER.info("===== 输出数据源：" + mapping.getTarget());
         LOGGER.info("===== 核心线程数：" + TaskConstants.TRANSFER_PARALLEL);
         LOGGER.info("===== 批处理数：" + TaskConstants.TRANSFER_BATCH);
-        ThreadPoolUtil instance = ThreadPoolUtil.getInstance(TaskConstants.TRANSFER_PARALLEL);
+        // 初始化线程池
+        ThreadPoolUtil instance = ThreadPoolUtil.getInstance(20);
+        // 数据输入
         DataInput dataInput = DataTransferFactory.getDataInput(mapping);
-        dataInput.input();
-        // 关闭线程池
+        // 数据输出
+        DataOutput dataOutput = DataTransferFactory.getDataOutput(mapping);
+        // 获取第一份数据
+        List<JSONObject> input = dataInput.input();
+        // 批处理
+        DataBatch dataBatch = new DataBatch(input, TaskConstants.TRANSFER_BATCH);
+        List<JSONObject> datas = null;
+        while (input != null) {
+            if (datas != null) {
+                dataBatch = new DataBatch(input, TaskConstants.TRANSFER_BATCH, datas);
+            }
+            while (dataBatch.batch()) {
+                datas = dataBatch.getBatchDatas();
+                instance.addThread(new TransferThread(dataOutput, datas));
+            }
+            datas = dataBatch.getBatchDatas();
+            input = dataInput.input();
+        }
+        // 处理最后剩余的数据
+        if (datas.size() > 0) {
+            instance.addThread(new TransferThread(dataOutput, datas));
+        }
         instance.shutdown();
-        LOGGER.info("=============================== 数据转移任务完成 ===============================");
     }
 
 }

@@ -1,8 +1,9 @@
-package com.zhysunny.transfer.util;
+package com.zhysunny.transfer.thread;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.transfer.BaseDataTransform;
 import com.zhysunny.transfer.DataOutput;
+import com.zhysunny.transfer.util.TaskConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,14 +14,14 @@ import java.util.List;
  * @author 章云
  * @date 2019/8/24 10:13
  */
-public class Transfer extends Thread {
+public class TransferThread extends Thread {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Transfer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransferThread.class);
 
     private DataOutput output;
     private List<JSONObject> datas;
 
-    public Transfer(DataOutput output, List<JSONObject> datas) {
+    public TransferThread(DataOutput output, List<JSONObject> datas) {
         this.output = output;
         this.datas = datas;
     }

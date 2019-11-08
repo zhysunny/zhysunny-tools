@@ -3,7 +3,7 @@ package com.zhysunny.transfer;
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.transfer.util.TaskConstants;
 import com.zhysunny.transfer.util.ThreadPoolUtil;
-import com.zhysunny.transfer.util.Transfer;
+import com.zhysunny.transfer.thread.TransferThread;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +15,12 @@ import java.util.List;
 public interface DataInput {
 
     /**
-     * 数据输入
+     * 文件的话读取整个文件并返回
+     * 数据库返回一次批量的数据
+     * @return
      * @throws Exception
      */
-    void input() throws Exception;
+    List<JSONObject> input() throws Exception;
 
     /**
      * 批量处理
@@ -28,11 +30,12 @@ public interface DataInput {
      * @param output
      * @return
      */
+    @Deprecated
     default List<JSONObject> transfer(List<JSONObject> datas, List<JSONObject> list, ThreadPoolUtil instance, DataOutput output) {
         for (JSONObject json : list) {
             datas.add(json);
             if (datas.size() == TaskConstants.TRANSFER_BATCH) {
-                instance.addThread(new Transfer(output, datas));
+                instance.addThread(new TransferThread(output, datas));
                 datas = new ArrayList<JSONObject>(TaskConstants.TRANSFER_BATCH);
             }
         }
