@@ -21,13 +21,9 @@
 <!-- name属性表示输出节点名 -->
 <!-- value属性表示输入节点名 -->
 <!-- type只有输出时有用，针对xml有属性和文本，默认是属性，text表示文本 -->
-<Mapping from="xml" to="xml" source="src/test/resources/xml/3/input.xml" target="src/test/resources/xml/3/output"
-         xml-from-data-node="Topic" xml-to-data-node="property" xml-root-name="Test">
-    <Field name="topicName" value="Topic.name"></Field>
-    <Field name="filter.Column.Key" value="Topic.Filter.Column.key"></Field>
-    <Field name="filter.Column.Value" value="Topic.Filter.Column.value"></Field>
-    <Field name="translate.Column.Key" value="Topic.Translate.Column.key"></Field>
-    <Field name="translate.Column.Value" value="Topic.Translate.Column.value"></Field>
-    <Field name="translate.Column.Name" value="Topic.Translate.Column.name"></Field>
-    <Field name="text" value="Topic.Column" type="text"></Field>
+<Mapping from="xml" to="xml" source="zhysunny-transfer/src/main/resources/example/xml/2/input.xml" target="E:\\transfer"
+         xml-from-data-node="property" xml-to-data-node="property" xml-root-name="Test">
+    <Field name="key" value="property.key"></Field>
+    <Field name="name" value="property.name" type="text"></Field>
+    <Field name="value" value="property.value" type="text"></Field>
 </Mapping>

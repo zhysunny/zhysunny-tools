@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -34,7 +35,7 @@ public class JsonToXml extends BaseAnyToXml {
     @Override
     public void write(Writer out, Object... params) throws Exception {
         if (params != null && params.length > 0) {
-            List<JSONObject> datas = (List<JSONObject>) params[0];
+            List<JSONObject> datas = (List<JSONObject>)params[0];
             try {
                 document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
                 // 开始写root
@@ -42,7 +43,8 @@ public class JsonToXml extends BaseAnyToXml {
                 Element root = document.createElement(rootName);
                 document.appendChild(root);
                 root.appendChild(document.createTextNode("\n"));
-                if (mapping.getXmlToDataNode() == null || mapping.getXmlToDataNode().trim().length() == 0 || mapping.getXmlToDataNode().equals(rootName)) {
+                if (mapping.getXmlToDataNode() == null || mapping.getXmlToDataNode().trim().length() == 0 || mapping.getXmlToDataNode()
+                .equals(rootName)) {
                     // 这种情况下，一个xml作为一条数据
                     appendChild(datas.get(0), root);
                 } else {
@@ -58,15 +60,11 @@ public class JsonToXml extends BaseAnyToXml {
                     }
                     addChildNodes(vector, root, datas.size());
                     for (int i = 0; i < datas.size(); i++) {
-                        appendChild(datas.get(i), (Element) nodes.get(i));
+                        appendChild(datas.get(i), (Element)nodes.get(i));
                     }
                 }
                 // 开始写入xml
-                DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult(out);
-                TransformerFactory transFactory = TransformerFactory.newInstance();
-                Transformer transformer = transFactory.newTransformer();
-                transformer.transform(source, result);
+                output(document, out);
             } catch (Exception e) {
                 throw new Exception(e);
             }
@@ -155,7 +153,7 @@ public class JsonToXml extends BaseAnyToXml {
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
             if (childName.equals(node.getNodeName())) {
-                return (Element) node;
+                return (Element)node;
             }
         }
         return null;

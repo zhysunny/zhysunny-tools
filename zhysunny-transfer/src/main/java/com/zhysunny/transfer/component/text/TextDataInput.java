@@ -5,11 +5,10 @@ import com.zhysunny.io.text.TextReader;
 import com.zhysunny.transfer.DataInput;
 import com.zhysunny.transfer.DataOutput;
 import com.zhysunny.transfer.mapping.Mapping;
+import com.zhysunny.transfer.thread.TransferThread;
 import com.zhysunny.transfer.util.TaskConstants;
 import com.zhysunny.transfer.util.ThreadPoolUtil;
-import com.zhysunny.transfer.util.Transfer;
 import com.zhysunny.transfer.util.Utils;
-import com.zhysunny.transfer.component.xml.XmlToJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +34,7 @@ public class TextDataInput implements DataInput {
     }
 
     @Override
-    public void input() throws Exception {
+    public List<JSONObject> input() throws Exception {
         // 如果输入数据类型是text，那么source必须是目录或者文件
         String source = mapping.getSource();
         File path = new File(source);
@@ -62,8 +61,9 @@ public class TextDataInput implements DataInput {
             reader.close();
         }
         if (datas.size() > 0) {
-            instance.addThread(new Transfer(output, datas));
+            instance.addThread(new TransferThread(output, datas));
         }
+        return null;
     }
 
 }

@@ -18,23 +18,11 @@
         <jdk.version>1.8</jdk.version>
         <compiler.encoding>UTF-8</compiler.encoding>
         <zhysunny.net.version>1.0</zhysunny.net.version>
-        <zhysunny.io.version>1.0</zhysunny.io.version>
+        <zhysunny.io.version>1.1</zhysunny.io.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- module start -->
-            <dependency>
-                <groupId>com.zhysunny</groupId>
-                <artifactId>zhysunny-shell</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zhysunny</groupId>
-                <artifactId>zhysunny-transfer</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- module end -->
             <!-- shell start -->
             <dependency>
                 <groupId>commons-lang</groupId>
@@ -58,7 +46,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.5</version>
+                <version>4.7</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
@@ -69,6 +57,16 @@
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
                 <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito2</artifactId>
+                <version>2.0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>2.0.4</version>
             </dependency>
             <!-- junit end -->
             <!-- json start -->
