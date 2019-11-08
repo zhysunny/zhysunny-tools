@@ -9,7 +9,7 @@ import com.zhysunny.transfer.DataBaseTransfer;
 public class XmlTransfer {
 
     public static void main(String[] args) throws Exception {
-//        args = new String[]{ "zhysunny-transfer/src/main/resources/example/xml/1/xml_to_xml.properties" };
+//        args = new String[]{ "zhysunny-transfer/src/main/resources/example/xml/1/transfer-xml_to_xml_1.xml" };
 //        DataBaseTransfer.main(args);
 //        args = new String[]{ "zhysunny-transfer/src/main/resources/example/xml/2/xml_to_xml.properties" };
 //        DataBaseTransfer.main(args);

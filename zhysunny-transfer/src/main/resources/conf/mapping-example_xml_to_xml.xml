@@ -6,7 +6,6 @@
 <!-- value属性表示输入节点名 -->
 <!-- type只有输出时有用，针对xml有属性和文本，默认是属性，text表示文本 -->
 <Mapping>
-    <Field name="key" value="property.key"></Field>
-    <Field name="name" value="property.name" type="text"></Field>
-    <Field name="value" value="property.value" type="text"></Field>
+    <Field name="name" value="Topics.name"></Field>
+    <Field name="topic" value="Topics" type="text"></Field>
 </Mapping>

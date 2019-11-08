@@ -25,7 +25,7 @@ public class XmlDataOutput extends DataOutputForFile {
     private Mapping mapping;
 
     public XmlDataOutput(Mapping mapping) {
-        super(mapping);
+        super();
         this.mapping = mapping;
     }
 

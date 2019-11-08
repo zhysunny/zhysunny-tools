@@ -1,7 +1,7 @@
 package com.zhysunny.transfer;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zhysunny.transfer.util.TaskConstants;
+import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.util.ThreadPoolUtil;
 import com.zhysunny.transfer.thread.TransferThread;
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public interface DataInput {
     default List<JSONObject> transfer(List<JSONObject> datas, List<JSONObject> list, ThreadPoolUtil instance, DataOutput output) {
         for (JSONObject json : list) {
             datas.add(json);
-            if (datas.size() == TaskConstants.TRANSFER_BATCH) {
+            if (datas.size() == Constants.TRANSFER_BATCH) {
                 instance.addThread(new TransferThread(output, datas));
-                datas = new ArrayList<JSONObject>(TaskConstants.TRANSFER_BATCH);
+                datas = new ArrayList<JSONObject>(Constants.TRANSFER_BATCH);
             }
         }
         return datas;

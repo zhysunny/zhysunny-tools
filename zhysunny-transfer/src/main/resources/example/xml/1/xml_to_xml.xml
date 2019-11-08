@@ -21,8 +21,7 @@
 <!-- name属性表示输出节点名 -->
 <!-- value属性表示输入节点名 -->
 <!-- type只有输出时有用，针对xml有属性和文本，默认是属性，text表示文本 -->
-<Mapping from="xml" to="xml" source="zhysunny-transfer/src/main/resources/example/xml/1/input.xml" target="E:\\transfer"
-         xml-from-data-node="" xml-to-data-node="" xml-root-name="Test">
+<Mapping>
     <Field name="name" value="Topics.name"></Field>
     <Field name="topic" value="Topics" type="text"></Field>
 </Mapping>

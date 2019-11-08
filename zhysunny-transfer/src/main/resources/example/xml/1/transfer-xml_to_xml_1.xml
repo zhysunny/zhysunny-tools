@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- 必填项 -->
+
+    <property>
+        <name>mapping.file</name>
+        <value>zhysunny-transfer/src/main/resources/example/xml/1/xml_to_xml.xml</value>
+        <description>(必填项)字段映射文件。</description>
+    </property>
+
+    <property>
+        <name>data.type.from</name>
+        <value>xml</value>
+        <description>(必填项)数据源类型，目前支持xml、text。</description>
+    </property>
+
+    <property>
+        <name>data.type.to</name>
+        <value>xml</value>
+        <description>(必填项)数据输出类型，目前支持xml、text。</description>
+    </property>
+
+    <property>
+        <name>data.source.from</name>
+        <value>zhysunny-transfer/src/main/resources/example/xml/1/input.xml</value>
+        <description>(必填项)数据源，对于文件类的数据源类型，支持文件或目录，目录的话会扫描相对应的文件类型，可以扫描多级目录；对于组件类数据源类型，填写表名。多个可以用逗号分隔，多个表名的话，表结构必须相同。
+        </description>
+    </property>
+
+    <property>
+        <name>data.source.to</name>
+        <value>E:\\transfer</value>
+        <description>(必填项)数据输出，对于文件类的数据源类型，只支持目录，可自动创建；对于组件类数据源类型，填写表名。不支持填写多个。</description>
+    </property>
+
+    <!-- xml config -->
+
+    <property>
+        <name>xml.root.name</name>
+        <value>Test</value>
+        <description>(必填项)表示root节点的名字</description>
+    </property>
+
+    <property>
+        <name>xml.data.node.from</name>
+        <value></value>
+        <description>(可选)表示从哪个节点开始作为单个数据，root节点可以省略，多级节点用'.'分割，如果为空，则表示一个xml一条记录</description>
+    </property>
+
+    <property>
+        <name>xml.data.node.to</name>
+        <value></value>
+        <description>
+            (可选)表示从哪个节点开始作为单个数据，root节点可以省略，多级节点用'.'分割，如果为空，则表示一个xml一条记录。如果不为空，那么映射文件中Field属性value值只填xml.data.node.to以下的节点即可
+        </description>
+    </property>
+
+</configuration>

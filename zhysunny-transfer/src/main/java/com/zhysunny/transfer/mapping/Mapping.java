@@ -14,45 +14,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Mapping implements XmlBean {
 
-    /**
-     * 输入数据类型
-     */
-    @XmlAttribute(name = "from")
-    private String from;
-    /**
-     * 输出数据类型
-     */
-    @XmlAttribute(name = "to")
-    private String to;
-    /**
-     * 输入数据源(表名，目录，文件等)
-     */
-    @XmlAttribute(name = "source")
-    private String source;
-    /**
-     * 输出数据源(表名，目录，文件等)
-     */
-    @XmlAttribute(name = "target")
-    private String target;
-
-    /************************* xml字段属性 start *************************/
-    /**
-     * 针对xml需要输入数据节点
-     */
-    @XmlAttribute(name = "xml-from-data-node")
-    private String xmlFromDataNode;
-    /**
-     * 针对xml需要输入数据节点
-     */
-    @XmlAttribute(name = "xml-to-data-node")
-    private String xmlToDataNode;
-    /**
-     * 针对xml需要输出的root节点名
-     */
-    @XmlAttribute(name = "xml-root-name")
-    private String xmlRootName;
-    /************************* xml字段属性 end *************************/
-
     /************************* text字段属性 start *************************/
     /**
      * 输入数据是否包含字段名(默认不包含)
@@ -79,68 +40,12 @@ public class Mapping implements XmlBean {
     @XmlElement(name = "Field")
     private List<Field> fields;
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
     public List<Field> getFields() {
         return fields;
     }
 
     public void setFields(List<Field> fields) {
         this.fields = fields;
-    }
-
-    public String getXmlFromDataNode() {
-        return xmlFromDataNode;
-    }
-
-    public void setXmlFromDataNode(String xmlFromDataNode) {
-        this.xmlFromDataNode = xmlFromDataNode;
-    }
-
-    public String getXmlToDataNode() {
-        return xmlToDataNode;
-    }
-
-    public void setXmlToDataNode(String xmlToDataNode) {
-        this.xmlToDataNode = xmlToDataNode;
-    }
-
-    public String getXmlRootName() {
-        return xmlRootName;
-    }
-
-    public void setXmlRootName(String xmlRootName) {
-        this.xmlRootName = xmlRootName;
     }
 
     public boolean isFromHeads() {
@@ -200,4 +105,5 @@ public class Mapping implements XmlBean {
         }
         return null;
     }
+
 }

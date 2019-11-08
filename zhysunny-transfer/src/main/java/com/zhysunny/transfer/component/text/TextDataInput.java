@@ -6,7 +6,7 @@ import com.zhysunny.transfer.DataInput;
 import com.zhysunny.transfer.DataOutput;
 import com.zhysunny.transfer.mapping.Mapping;
 import com.zhysunny.transfer.thread.TransferThread;
-import com.zhysunny.transfer.util.TaskConstants;
+import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.util.ThreadPoolUtil;
 import com.zhysunny.transfer.util.Utils;
 import org.slf4j.Logger;
@@ -36,23 +36,22 @@ public class TextDataInput implements DataInput {
     @Override
     public List<JSONObject> input() throws Exception {
         // 如果输入数据类型是text，那么source必须是目录或者文件
-        String source = mapping.getSource();
-        File path = new File(source);
+        String[] sources = Constants.DATA_SOURCE_FROM;
         List<String> files = new ArrayList<String>();
-        // 读取text数据时不过滤掉，对任务文本类型都会读取
-        Utils.getFiles(path, "", files);
-        List<JSONObject> datas = new ArrayList<JSONObject>(TaskConstants.TRANSFER_BATCH);
+        for (String source : sources) {
+            File path = new File(source);
+            // 读取text数据时不过滤掉，对任务文本类型都会读取
+            Utils.getFiles(path, "", files);
+        }
+        List<JSONObject> datas = new ArrayList<JSONObject>(Constants.TRANSFER_BATCH);
         ThreadPoolUtil instance = ThreadPoolUtil.getInstance();
         List<JSONObject> list = null;
         for (String fileName : files) {
             LOGGER.info("读取文件：" + fileName);
-            TextReader reader = new TextReader(fileName)
-                    .setHasHead(mapping.isFromHeads())
-                    .setSplit(mapping.getFromSplits())
-                    .setBatch(TaskConstants.TRANSFER_BATCH)
-                    .builder();
+            TextReader reader = new TextReader(fileName).setHasHead(mapping.isFromHeads()).setSplit(mapping.getFromSplits())
+            .setBatch(Constants.TRANSFER_BATCH).builder();
             while (true) {
-                list = reader.read(new TextToJson(mapping), (Object[]) reader.getHeads());
+                list = reader.read(new TextToJson(mapping), (Object[])reader.getHeads());
                 if (list.size() == 0) {
                     break;
                 }

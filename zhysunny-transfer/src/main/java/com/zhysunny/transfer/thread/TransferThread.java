@@ -3,7 +3,7 @@ package com.zhysunny.transfer.thread;
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.transfer.BaseDataTransform;
 import com.zhysunny.transfer.DataOutput;
-import com.zhysunny.transfer.util.TaskConstants;
+import com.zhysunny.transfer.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class TransferThread extends Thread {
         LOGGER.info(this.getName() + "处理线程启动。。。");
         try {
             // 数据转换
-            String className = TaskConstants.TRANSFER_WAY;
+            String className = Constants.TRANSFER_WAY;
             Class<?> clz = Class.forName(className);
             BaseDataTransform transform = (BaseDataTransform) clz.newInstance();
             datas = transform.transform(datas);

@@ -21,7 +21,7 @@ public class XmlDataInput extends DataInputForFile {
     private Mapping mapping;
 
     public XmlDataInput(Mapping mapping) {
-        super(mapping, ".xml");
+        super(".xml");
         this.mapping = mapping;
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 不要直接修改这个文件 -->
+<configuration>
+
+    <property>
+        <name>transfer.batch</name>
+        <value>10000</value>
+        <description>输入输出的批处理数。对于文件输出而言，决定每个文件所存储的记录数</description>
+    </property>
+
+    <property>
+        <name>transfer.parallel</name>
+        <value>20</value>
+        <description>输出线程池核心线程数。对于文件输出而言，批处理数和并发数决定输出多少文件</description>
+    </property>
+
+    <property>
+        <name>transform.way</name>
+        <value>com.zhysunny.transfer.transform.NoneTransform</value>
+        <description>数据转换方式，默认不转换</description>
+    </property>
+
+</configuration>

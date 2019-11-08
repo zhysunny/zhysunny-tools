@@ -2,6 +2,7 @@ package com.zhysunny.transfer.component.xml;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.xml.writer.BaseAnyToXml;
+import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.mapping.Mapping;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,17 +40,17 @@ public class JsonToXml extends BaseAnyToXml {
             try {
                 document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
                 // 开始写root
-                String rootName = mapping.getXmlRootName();
+                String rootName = Constants.XML_ROOT_NAME;
                 Element root = document.createElement(rootName);
                 document.appendChild(root);
                 root.appendChild(document.createTextNode("\n"));
-                if (mapping.getXmlToDataNode() == null || mapping.getXmlToDataNode().trim().length() == 0 || mapping.getXmlToDataNode()
+                if (Constants.XML_DATA_NODE_TO == null || Constants.XML_DATA_NODE_TO.trim().length() == 0 || Constants.XML_DATA_NODE_TO
                 .equals(rootName)) {
                     // 这种情况下，一个xml作为一条数据
                     appendChild(datas.get(0), root);
                 } else {
                     // 走到这个方法，tokenizer的长度肯定不是1
-                    StringTokenizer tokenizer = new StringTokenizer(mapping.getXmlToDataNode(), "\\.");
+                    StringTokenizer tokenizer = new StringTokenizer(Constants.XML_DATA_NODE_TO, "\\.");
                     String first = tokenizer.nextToken();
                     Vector<String> vector = new Vector<String>(tokenizer.countTokens());
                     if (!rootName.equals(first)) {
@@ -86,7 +87,7 @@ public class JsonToXml extends BaseAnyToXml {
             StringTokenizer tokenizer = new StringTokenizer(key, "\\.");
             String first = tokenizer.nextToken();
             Vector<String> vector = new Vector<String>(tokenizer.countTokens());
-            if (!first.equals(mapping.getXmlRootName())) {
+            if (!first.equals(Constants.XML_ROOT_NAME)) {
                 vector.add(first);
             }
             while (tokenizer.hasMoreTokens()) {

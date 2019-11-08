@@ -3,6 +3,7 @@ package com.zhysunny.transfer.component.xml;
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.xml.XmlReader;
 import com.zhysunny.io.xml.reader.BaseXmlToAny;
+import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.mapping.Mapping;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -31,14 +32,14 @@ public class XmlToJson extends BaseXmlToAny {
         List<JSONObject> result = new ArrayList<JSONObject>();
         Node root = reader.getDocument().getDocumentElement();
         String rootName = root.getNodeName();
-        if (mapping.getXmlFromDataNode() == null || mapping.getXmlFromDataNode().trim().length() == 0 || mapping.getXmlFromDataNode().equals(rootName)) {
+        if (Constants.XML_DATA_NODE_FROM == null || Constants.XML_DATA_NODE_FROM.trim().length() == 0 || Constants.XML_DATA_NODE_FROM.equals(rootName)) {
             // 这种情况下，一个xml作为一条数据
             JSONObject json = new JSONObject(true);
             read(json, root, root.getNodeName());
             result.add(json);
         } else {
             // 走到这个方法，tokenizer的长度肯定不是1
-            StringTokenizer tokenizer = new StringTokenizer(mapping.getXmlFromDataNode(), "\\.");
+            StringTokenizer tokenizer = new StringTokenizer(Constants.XML_DATA_NODE_FROM, "\\.");
             String first = tokenizer.nextToken();
             Vector<String> vector = new Vector<String>(tokenizer.countTokens());
             if (!rootName.equals(first)) {

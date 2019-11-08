@@ -3,6 +3,7 @@ package com.zhysunny.transfer.component.text;
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.text.TextWriter;
 import com.zhysunny.transfer.DataOutput;
+import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.mapping.Mapping;
 
 import java.io.File;
@@ -23,7 +24,7 @@ public class TextDataOutput implements DataOutput {
     @Override
     public int output(List<JSONObject> datas) throws Exception {
         // 如果输出数据类型是text，那么target必须是目录或者文件名前缀
-        String target = mapping.getTarget();
+        String target = Constants.DATA_SOURCE_TO;
         File path = new File(target);
         if (target.endsWith("/") && !path.exists()) {
             path.mkdirs();
