@@ -37,16 +37,18 @@
 
     <!-- xml config -->
 
-    <property>
-        <name>xml.root.name</name>
-        <value></value>
-        <description>(必填项)表示root节点的名字</description>
-    </property>
-
+    <!-- xml input -->
     <property>
         <name>xml.data.node.from</name>
         <value></value>
         <description>(可选)表示从哪个节点开始作为单个数据，root节点可以省略，多级节点用'.'分割，如果为空，则表示一个xml一条记录</description>
+    </property>
+
+    <!-- xml output -->
+    <property>
+        <name>xml.root.name</name>
+        <value></value>
+        <description>(必填项)表示root节点的名字</description>
     </property>
 
     <property>

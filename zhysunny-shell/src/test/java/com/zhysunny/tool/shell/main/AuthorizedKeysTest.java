@@ -1,18 +1,17 @@
 package com.zhysunny.tool.shell.main;
 
-import static com.zhysunny.tool.shell.main.AuthorizedKeys.*;
-import static org.junit.Assert.*;
 import com.zhysunny.net.sftp.SftpConnection;
 import com.zhysunny.net.ssh.SshConnection;
 import com.zhysunny.net.util.NetUtils;
 import com.zhysunny.tool.shell.constant.FinalConstants;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.junit.*;
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.io.File;
+import java.io.InputStream;
 import java.util.*;
+import static com.zhysunny.tool.shell.main.AuthorizedKeys.*;
+import static org.junit.Assert.*;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * AuthorizedKeys Test.
@@ -34,7 +33,7 @@ public class AuthorizedKeysTest {
         host = "192.168.1.44";
         username = "root";
         password = "123456";
-        ssh = new SshConnection(host, username, password);
+        ssh = mock(SshConnection.class);
         sshPath = "/root/.ssh";
         infoMap = new TreeMap<>();
         System.out.println("登录" + host + "，用户名" + username);
@@ -66,7 +65,7 @@ public class AuthorizedKeysTest {
     /**
      * Method: main(String[] args)
      */
-    @Test
+//    @Test
     public void testMain() throws Exception {
         String[] args = new String[]{ "192.168.1.44", "root", "123456" };
         List<String> ipList = NetUtils.splitIp(args[0]);
@@ -118,7 +117,26 @@ public class AuthorizedKeysTest {
      */
     @Test
     public void testCreatePublicKey() throws Exception {
+        // 模拟已包含秘钥的情况(成功)
+        List<String> names = new ArrayList<>();
+        names.add(FinalConstants.ID_RSA);
+        when(ssh.sendCommand("ls -l " + sshPath + " | grep \"^-\" | awk '{print $9}'")).thenReturn(names);
         assertTrue(createPublicKey(ssh, sshPath));
+        // 模拟未包含秘钥的情况，生成秘钥返回正常信息的情况(成功)
+        names.clear();
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 17; i++) {
+            result.add("");
+        }
+        when(ssh.sendCommand("ls -l " + sshPath + " | grep \"^-\" | awk '{print $9}'")).thenReturn(names);
+        when(ssh.sendCommand("ssh-keygen -t rsa -P '' -f '" + sshPath + "/id_rsa'")).thenReturn(result);
+        assertTrue(createPublicKey(ssh, sshPath));
+        // 模拟未包含秘钥的情况，生成秘钥返回错误信息的情况(失败)
+        result.clear();
+        result.add("");//一条表示执行命令的错误信息
+        when(ssh.sendCommand("ls -l " + sshPath + " | grep \"^-\" | awk '{print $9}'")).thenReturn(names);
+        when(ssh.sendCommand("ssh-keygen -t rsa -P '' -f '" + sshPath + "/id_rsa'")).thenReturn(result);
+        assertFalse(createPublicKey(ssh, sshPath));
     }
 
     /**
@@ -126,6 +144,10 @@ public class AuthorizedKeysTest {
      */
     @Test
     public void testGetNodeSecretKey() throws Exception {
+        // 模拟返回值
+        when(ssh.sendCmd("hostname")).thenReturn("test4");
+        when(ssh.sendCmd("cat " + sshPath + "/id_rsa.pub")).thenReturn("AUTHORIZED_KEYS");
+        when(ssh.getHost()).thenReturn("192.168.1.44");
         Map<String, String> info = getNodeSecretKey(ssh, sshPath);
         assertEquals(info.get(FinalConstants.HOSTNAME), "test4");
         assertEquals(info.get(FinalConstants.HOST), "192.168.1.44");
@@ -142,7 +164,7 @@ public class AuthorizedKeysTest {
         // hosts文件需要先从/etc/hosts拷贝到当前位置
         // 读取hosts文件，新增映射关系
         InputStream is = getClass().getClassLoader().getResourceAsStream("etc/hosts");
-        File toFile = new File("src/test/resources/tmp/hosts");
+        File toFile = new File("temp/hosts");
         assertTrue(createHostsFile(infoMap, is, toFile));
     }
 
@@ -151,7 +173,7 @@ public class AuthorizedKeysTest {
      */
     @Test
     public void testCreateKeyFile() throws Exception {
-        File toFile = new File("src/test/resources/tmp/authorized_keys");
+        File toFile = new File("temp/authorized_keys");
         assertTrue(createKeyFile(infoMap, toFile));
     }
 
@@ -160,11 +182,16 @@ public class AuthorizedKeysTest {
      */
     @Test
     public void testPutFileBySftp() throws Exception {
-        SftpConnection sftp = new SftpConnection(host, username, password);
-        File hosts = new File("src/test/resources/tmp/hosts");
-        File keyFile = new File("src/test/resources/tmp/authorized_keys");
+        File hosts = new File("temp/hosts");
+        File keyFile = new File("temp/authorized_keys");
+        // 模拟成功的情况
+        SftpConnection sftp = mock(SftpConnection.class);
+        when(sftp.put(hosts, "/etc")).thenReturn(true);
+        when(sftp.put(keyFile, sshPath)).thenReturn(true);
         assertTrue(putFileBySftp(sftp, hosts, keyFile, sshPath));
-        sftp.close();
+        // 模拟失败的情况
+        when(sftp.put(hosts, "/etc")).thenThrow(Exception.class);
+        assertFalse(putFileBySftp(sftp, hosts, keyFile, sshPath));
     }
 
 }
