@@ -47,8 +47,12 @@ public class AuthorizedKeysTest {
             info.put(FinalConstants.AUTHORIZED_KEYS, UUID.randomUUID().toString());
             infoMap.put(host, info);
         }
-        hosts = new File("temp/hosts");
-        keyFile = new File("temp/authorized_keys");
+        File temp = new File("temp");
+        if (!temp.exists()) {
+            temp.mkdirs();
+        }
+        hosts = new File(temp, "hosts");
+        keyFile = new File(temp, "authorized_keys");
     }
 
     @Before

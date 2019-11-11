@@ -65,10 +65,11 @@ public class DataBaseTransfer {
         LOGGER.info("===== 数据输出类型：" + Constants.DATA_TYPE_TO);
         LOGGER.info("===== 输入数据源：" + Arrays.toString(Constants.DATA_SOURCE_FROM));
         LOGGER.info("===== 输出数据源：" + Constants.DATA_SOURCE_TO);
-        LOGGER.info("===== 核心线程数：" + Constants.TRANSFER_PARALLEL);
+        LOGGER.info("===== 核心线程数：" + Constants.TRANSFER_THREAD_CORE_NUM);
+        LOGGER.info("===== 并发数：" + Constants.TRANSFER_PARALLEL);
         LOGGER.info("===== 批处理数：" + Constants.TRANSFER_BATCH);
         // 初始化线程池
-        ThreadPoolUtil instance = ThreadPoolUtil.getInstance(20);
+        ThreadPoolUtil instance = ThreadPoolUtil.getInstance(Constants.TRANSFER_THREAD_CORE_NUM);
         // 数据输入
         DataInput dataInput = DataTransferFactory.getDataInput(mapping);
         // 数据输出

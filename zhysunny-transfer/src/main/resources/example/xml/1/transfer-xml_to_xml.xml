@@ -31,7 +31,7 @@
 
     <property>
         <name>data.source.to</name>
-        <value>E:\\transfer</value>
+        <value>temp</value>
         <description>(必填项)数据输出，对于文件类的数据源类型，只支持目录，可自动创建；对于组件类数据源类型，填写表名。不支持填写多个。</description>
     </property>
 

@@ -31,16 +31,7 @@ public class XmlDataOutput extends DataOutputForFile {
 
     @Override
     public int output(List<JSONObject> datas) throws Exception {
-        File file = new File(path, UUID.randomUUID().toString() + ".xml");
-        synchronized (mapping) {
-            while (file.exists()) {
-                Thread.sleep(100);
-                file = new File(path, UUID.randomUUID().toString() + ".xml");
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        }
+        File file = getFile(mapping, ".xml");
         new XmlWriter(file).write(new JsonToXml(mapping), datas);
         LOGGER.info("文件：{}写入数据量：{}", file.getAbsolutePath(), datas.size());
         return datas.size();

@@ -16,7 +16,7 @@ import java.util.List;
 public class XmlToJsonTest {
 
     private Mapping mapping;
-    private ClassLoader classLoader = XmlToJson.class.getClassLoader();
+    private ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
     @BeforeClass
     public static void beforeClass() throws Exception {

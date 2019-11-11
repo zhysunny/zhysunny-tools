@@ -14,29 +14,6 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Mapping implements XmlBean {
 
-    /************************* text字段属性 start *************************/
-    /**
-     * 输入数据是否包含字段名(默认不包含)
-     */
-    @XmlAttribute(name = "text-has-from-heads")
-    private boolean fromHeads;
-    /**
-     * 输出数据是否包含字段名(默认不包含)
-     */
-    @XmlAttribute(name = "text-has-to-heads")
-    private boolean toHeads;
-    /**
-     * 输入数据分隔符(默认逗号)
-     */
-    @XmlAttribute(name = "text-from-split")
-    private String fromSplits = ",";
-    /**
-     * 输出数据分隔符(默认逗号)
-     */
-    @XmlAttribute(name = "text-to-split")
-    private String toSplits = ",";
-    /************************* text字段属性 end *************************/
-
     @XmlElement(name = "Field")
     private List<Field> fields;
 
@@ -46,38 +23,6 @@ public class Mapping implements XmlBean {
 
     public void setFields(List<Field> fields) {
         this.fields = fields;
-    }
-
-    public boolean isFromHeads() {
-        return fromHeads;
-    }
-
-    public void setFromHeads(boolean fromHeads) {
-        this.fromHeads = fromHeads;
-    }
-
-    public boolean isToHeads() {
-        return toHeads;
-    }
-
-    public void setToHeads(boolean toHeads) {
-        this.toHeads = toHeads;
-    }
-
-    public String getFromSplits() {
-        return fromSplits;
-    }
-
-    public void setFromSplits(String fromSplits) {
-        this.fromSplits = fromSplits;
-    }
-
-    public String getToSplits() {
-        return toSplits;
-    }
-
-    public void setToSplits(String toSplits) {
-        this.toSplits = toSplits;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.zhysunny.transfer;
 
+import com.zhysunny.transfer.component.text.TextDataInput;
+import com.zhysunny.transfer.component.text.TextDataOutput;
 import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.mapping.Mapping;
 import com.zhysunny.transfer.component.xml.XmlDataInput;
@@ -17,12 +19,18 @@ public class DataTransferFactory {
         if ("xml".equalsIgnoreCase(Constants.DATA_TYPE_FROM)) {
             return new XmlDataInput(mapping);
         }
+        if ("text".equalsIgnoreCase(Constants.DATA_TYPE_FROM)) {
+            return new TextDataInput(mapping);
+        }
         return null;
     }
 
     public static DataOutput getDataOutput(Mapping mapping) {
-        if ("xml".equalsIgnoreCase(Constants.DATA_TYPE_FROM)) {
+        if ("xml".equalsIgnoreCase(Constants.DATA_TYPE_TO)) {
             return new XmlDataOutput(mapping);
+        }
+        if ("text".equalsIgnoreCase(Constants.DATA_TYPE_TO)) {
+            return new TextDataOutput(mapping);
         }
         return null;
     }

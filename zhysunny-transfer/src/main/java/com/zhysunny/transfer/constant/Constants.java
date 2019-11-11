@@ -55,6 +55,12 @@ public class Constants implements PropertiesConstant {
     public static int TRANSFER_PARALLEL;
 
     /**
+     * 输出线程池核心线程数
+     */
+    @PropKey(key = "transfer.thread.core.num", defaultValue = "20")
+    public static int TRANSFER_THREAD_CORE_NUM;
+
+    /**
      * 数据转换方式，默认不转换
      */
     @PropKey(key = "transform.way", defaultValue = "com.zhysunny.transfer.transform.NoneTransform")
@@ -79,5 +85,31 @@ public class Constants implements PropertiesConstant {
      */
     @PropKey(key = "xml.data.node.to")
     public static String XML_DATA_NODE_TO;
+
+    /*********************   text config   ***************************/
+
+    /**
+     * 输入数据是否包含字段名(默认不包含)
+     */
+    @PropKey(key = "text.has.heads.from", defaultValue = "false")
+    public static boolean TEXT_HAS_HEADS_FROM;
+
+    /**
+     * 输入数据分隔符(默认逗号)
+     */
+    @PropKey(key = "text.line.split.from", defaultValue = ",")
+    public static String TEXT_LINE_SPLIT_FROM;
+
+    /**
+     * 输出数据是否包含字段名(默认不包含)
+     */
+    @PropKey(key = "text.has.heads.to", defaultValue = "false")
+    public static boolean TEXT_HAS_HEADS_TO;
+
+    /**
+     * 输出数据分隔符(默认逗号)
+     */
+    @PropKey(key = "text.line.split.to", defaultValue = ",")
+    public static String TEXT_LINE_SPLIT_TO;
 
 }

@@ -9,9 +9,15 @@
     </property>
 
     <property>
+        <name>transfer.thread.core.num</name>
+        <value>20</value>
+        <description>输出线程池核心线程数</description>
+    </property>
+
+    <property>
         <name>transfer.parallel</name>
         <value>20</value>
-        <description>输出线程池核心线程数。对于文件输出而言，批处理数和并发数决定输出多少文件</description>
+        <description>输出线程并发数。对于文件输出而言，批处理数和并发数决定输出多少文件</description>
     </property>
 
     <property>
