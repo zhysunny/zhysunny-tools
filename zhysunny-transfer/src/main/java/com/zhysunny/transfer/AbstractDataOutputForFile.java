@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author 章云
  * @date 2019/11/7 18:37
  */
-public abstract class DataOutputForFile implements DataOutput {
+public abstract class AbstractDataOutputForFile implements DataOutput {
 
     protected File path;
 
-    public DataOutputForFile() {
+    public AbstractDataOutputForFile() {
         String target = Constants.DATA_SOURCE_TO;
         path = new File(target);
         if (!path.exists()) {

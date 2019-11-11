@@ -1,5 +1,6 @@
 package com.zhysunny.transfer.constant;
 
+import com.zhysunny.driver.util.JdbcConfig;
 import com.zhysunny.io.properties.PropKey;
 import com.zhysunny.io.properties.PropertiesConstant;
 
@@ -111,5 +112,25 @@ public class Constants implements PropertiesConstant {
      */
     @PropKey(key = "text.line.split.to", defaultValue = ",")
     public static String TEXT_LINE_SPLIT_TO;
+
+    /*********************   oracle config   ***************************/
+
+    /**
+     * oracle输入表连接配置，driver，url，username，password
+     */
+    @PropKey(key = "jdbc.connection.configs.input", defaultValue = "true")
+    public static JdbcConfig JDBC_CONNECTION_CONFIGS_INPUT;
+
+    /**
+     * oracle输入表连接配置，driver，url，username，password
+     */
+    @PropKey(key = "jdbc.connection.configs.output", defaultValue = "true")
+    public static JdbcConfig JDBC_CONNECTION_CONFIGS_OUTPUT;
+
+    /**
+     * 是否自动更新输出表表结构，表结构为映射xml(默认true)
+     */
+    @PropKey(key = "oracle.column.auto.update", defaultValue = "true")
+    public static boolean ORACLE_COLUMN_AUTO_UPDATE;
 
 }

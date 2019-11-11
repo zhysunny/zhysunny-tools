@@ -19,17 +19,13 @@
         <compiler.encoding>UTF-8</compiler.encoding>
         <zhysunny.net.version>1.0</zhysunny.net.version>
         <zhysunny.io.version>1.1</zhysunny.io.version>
+        <zhysunny.driver.version>1.1</zhysunny.driver.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!-- shell start -->
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
             <dependency>
                 <groupId>com.zhysunny</groupId>
                 <artifactId>zhysunny-net</artifactId>
@@ -41,6 +37,11 @@
                 <groupId>com.zhysunny</groupId>
                 <artifactId>zhysunny-io</artifactId>
                 <version>${zhysunny.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhysunny</groupId>
+                <artifactId>zhysunny-driver</artifactId>
+                <version>${zhysunny.driver.version}</version>
             </dependency>
             <!-- transfer end -->
             <!-- junit start -->
@@ -84,6 +85,11 @@
                 <version>1.7.25</version>
             </dependency>
             <!-- logger end -->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

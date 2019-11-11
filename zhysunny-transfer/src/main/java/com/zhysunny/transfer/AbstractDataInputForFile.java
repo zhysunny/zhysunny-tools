@@ -12,12 +12,12 @@ import java.util.List;
  * @author 章云
  * @date 2019/11/7 17:59
  */
-public abstract class DataInputForFile implements DataInput {
+public abstract class AbstractDataInputForFile implements DataInput {
 
     protected List<String> files;
     protected int index;
 
-    public DataInputForFile(String suffix) {
+    public AbstractDataInputForFile(String suffix) {
         this.index = 0;
         String[] sources = Constants.DATA_SOURCE_FROM;
         files = new ArrayList<>();

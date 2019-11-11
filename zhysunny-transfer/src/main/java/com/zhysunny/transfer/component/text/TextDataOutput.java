@@ -2,9 +2,7 @@ package com.zhysunny.transfer.component.text;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.text.TextWriter;
-import com.zhysunny.transfer.DataOutput;
-import com.zhysunny.transfer.DataOutputForFile;
-import com.zhysunny.transfer.component.xml.XmlDataOutput;
+import com.zhysunny.transfer.AbstractDataOutputForFile;
 import com.zhysunny.transfer.constant.Constants;
 import com.zhysunny.transfer.mapping.Mapping;
 import org.slf4j.Logger;
@@ -12,14 +10,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 文本类数据输出
  * @author 章云
  * @date 2019/8/27 15:45
  */
-public class TextDataOutput extends DataOutputForFile {
+public class TextDataOutput extends AbstractDataOutputForFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TextDataOutput.class);
 

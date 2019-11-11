@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Field标签属性 -->
+<!-- name属性表示输出oracle的字段名，忽略大小写 -->
+<!-- value属性表示输入oracle的字段名，忽略大小写 -->
+<!-- type属性表示输出表字段类型 -->
+<!-- length属性表示输出表字段长度 -->
+<Mapping>
+    <Field name="NAME" value="NAME"></Field>
+    <Field name="AGE" value="NAME" type="int"></Field>
+    <Field name="SEX" value="NAME" type="int"></Field>
+</Mapping>

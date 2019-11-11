@@ -30,6 +30,12 @@ public class Field {
     @XmlAttribute(name = "type")
     private String type;
 
+    /**
+     * 字段长度，oracle和mysql使用
+     */
+    @XmlAttribute(name = "length")
+    private String length;
+
     public String getToName() {
         return toName;
     }
@@ -54,12 +60,17 @@ public class Field {
         this.type = type;
     }
 
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
     @Override
     public String toString() {
-        return "Field{" +
-                "toName='" + toName + '\'' +
-                ", fromName='" + fromName + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+        return "Field{" + "toName='" + toName + '\'' + ", fromName='" + fromName + '\'' + ", type='" + type + '\'' + ", length='" + length
+        + '\'' + '}';
     }
 }

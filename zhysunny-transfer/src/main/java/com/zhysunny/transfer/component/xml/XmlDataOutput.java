@@ -2,23 +2,20 @@ package com.zhysunny.transfer.component.xml;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.xml.XmlWriter;
-import com.zhysunny.transfer.DataOutput;
-import com.zhysunny.transfer.DataOutputForFile;
+import com.zhysunny.transfer.AbstractDataOutputForFile;
 import com.zhysunny.transfer.mapping.Mapping;
-import com.zhysunny.transfer.thread.TransferThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Xml写入
  * @author 章云
  * @date 2019/8/23 15:19
  */
-public class XmlDataOutput extends DataOutputForFile {
+public class XmlDataOutput extends AbstractDataOutputForFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlDataOutput.class);
 

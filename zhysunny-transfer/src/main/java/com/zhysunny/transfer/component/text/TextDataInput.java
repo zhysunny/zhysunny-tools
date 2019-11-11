@@ -2,21 +2,12 @@ package com.zhysunny.transfer.component.text;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.text.TextReader;
-import com.zhysunny.io.xml.XmlReader;
-import com.zhysunny.transfer.DataInput;
-import com.zhysunny.transfer.DataInputForFile;
-import com.zhysunny.transfer.DataOutput;
-import com.zhysunny.transfer.component.xml.XmlToJson;
+import com.zhysunny.transfer.AbstractDataInputForFile;
 import com.zhysunny.transfer.mapping.Mapping;
-import com.zhysunny.transfer.thread.TransferThread;
 import com.zhysunny.transfer.constant.Constants;
-import com.zhysunny.transfer.util.ThreadPoolUtil;
-import com.zhysunny.transfer.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +15,7 @@ import java.util.List;
  * @author 章云
  * @date 2019/8/27 15:45
  */
-public class TextDataInput extends DataInputForFile {
+public class TextDataInput extends AbstractDataInputForFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TextDataInput.class);
 

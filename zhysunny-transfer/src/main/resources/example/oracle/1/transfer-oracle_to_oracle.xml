@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- 必填项 -->
+
+    <property>
+        <name>mapping.file</name>
+        <value>zhysunny-transfer/src/main/resources/example/oracle/1/oracle_to_oracle.xml</value>
+        <description>(必填项)字段映射文件。</description>
+    </property>
+
+    <property>
+        <name>data.type.from</name>
+        <value>oracle</value>
+        <description>(必填项)数据源类型，目前支持xml、text。</description>
+    </property>
+
+    <property>
+        <name>data.type.to</name>
+        <value>oracle</value>
+        <description>(必填项)数据输出类型，目前支持xml、text。</description>
+    </property>
+
+    <property>
+        <name>data.source.from</name>
+        <value>STUDENT_INPUT</value>
+        <description>(必填项)数据源，对于文件类的数据源类型，支持文件或目录，目录的话会扫描相对应的文件类型，可以扫描多级目录；对于组件类数据源类型，填写表名。多个可以用逗号分隔，多个表名的话，表结构必须相同。
+        </description>
+    </property>
+
+    <property>
+        <name>data.source.to</name>
+        <value>STUDENT_OUTPUT</value>
+        <description>(必填项)数据输出，对于文件类的数据源类型，只支持目录，可自动创建；对于组件类数据源类型，填写表名。不支持填写多个。</description>
+    </property>
+
+    <!-- oracle config -->
+
+    <!-- oracle input -->
+    <property>
+        <name>jdbc.connection.configs.input</name>
+        <value>oracle.jdbc.driver.OracleDriver,jdbc:oracle:thin:@localhost:1521:ORCL,ZHANGYUN,ZHANGYUN</value>
+        <description>(必填)oracle输入表连接配置，driver，url，username，password</description>
+    </property>
+
+    <!-- oracle output -->
+    <property>
+        <name>jdbc.connection.configs.output</name>
+        <value>oracle.jdbc.driver.OracleDriver,jdbc:oracle:thin:@localhost:1521:ORCL,ZHANGYUN,ZHANGYUN</value>
+        <description>(必填)oracle输出表连接配置，driver，url，username，password</description>
+    </property>
+    <property>
+        <name>oracle.column.auto.update</name>
+        <value>true</value>
+        <description>(可选)是否自动更新输出表表结构，表结构为映射xml(默认true)</description>
+    </property>
+
+</configuration>

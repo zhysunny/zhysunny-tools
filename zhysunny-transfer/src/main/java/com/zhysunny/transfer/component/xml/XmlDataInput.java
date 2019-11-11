@@ -2,7 +2,7 @@ package com.zhysunny.transfer.component.xml;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhysunny.io.xml.XmlReader;
-import com.zhysunny.transfer.DataInputForFile;
+import com.zhysunny.transfer.AbstractDataInputForFile;
 import com.zhysunny.transfer.mapping.Mapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author 章云
  * @date 2019/8/15 21:13
  */
-public class XmlDataInput extends DataInputForFile {
+public class XmlDataInput extends AbstractDataInputForFile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlDataInput.class);
 

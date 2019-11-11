@@ -22,24 +22,4 @@ public interface DataInput {
      */
     List<JSONObject> input() throws Exception;
 
-    /**
-     * 批量处理
-     * @param datas
-     * @param list
-     * @param instance
-     * @param output
-     * @return
-     */
-    @Deprecated
-    default List<JSONObject> transfer(List<JSONObject> datas, List<JSONObject> list, ThreadPoolUtil instance, DataOutput output) {
-        for (JSONObject json : list) {
-            datas.add(json);
-            if (datas.size() == Constants.TRANSFER_BATCH) {
-                instance.addThread(new TransferThread(output, datas));
-                datas = new ArrayList<JSONObject>(Constants.TRANSFER_BATCH);
-            }
-        }
-        return datas;
-    }
-
 }
