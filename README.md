@@ -2,6 +2,10 @@
 
 该工程用于封装一些工具，以jar包的形式运行
 
+## hive
+
+* 存放hive udf udtf udaf
+
 ## shell
 
 * 存放java与shell交互的工具包
@@ -28,3 +32,4 @@
 * 使用mock完善单元测试
 * 对于组件的测试写example
 * 至少增加两个组件的读写功能
+* 编写hive的udf udtf udaf
