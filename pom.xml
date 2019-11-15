@@ -20,7 +20,7 @@
         <scala.version>2.11</scala.version>
         <spark.version>2.3.0</spark.version>
         <compiler.encoding>UTF-8</compiler.encoding>
-        <zhysunny.version>1.0</zhysunny.version>
+        <zhysunny.version>1.1</zhysunny.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 

@@ -1,9 +1,5 @@
 package com.zhysunny.hive.udaf;
 
-import static org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector.PrimitiveCategory.*;
-import static org.junit.Assert.*;
-import static org.powermock.api.mockito.PowerMockito.*;
-import org.apache.hadoop.hive.ql.exec.FunctionRegistry;
 import org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
@@ -11,6 +7,8 @@ import org.apache.hadoop.hive.serde2.typeinfo.PrimitiveTypeInfo;
 import org.apache.hadoop.hive.serde2.typeinfo.TypeInfo;
 import org.apache.hadoop.io.DoubleWritable;
 import org.junit.*;
+import static org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector.PrimitiveCategory.*;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * AvgBirthToAge Test.

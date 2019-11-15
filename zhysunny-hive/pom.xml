@@ -19,23 +19,27 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_${scala.version}</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.zhysunny</groupId>
-            <artifactId>zhysunny-common</artifactId>
-        </dependency>
         <!-- hive end -->
         <!-- junit start -->
         <dependency>
+            <groupId>com.zhysunny</groupId>
+            <artifactId>zhysunny-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
