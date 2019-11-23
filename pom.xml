@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zhysunny</groupId>
+    <groupId>com.zhysunny.tools</groupId>
     <artifactId>zhysunny-tools</artifactId>
     <packaging>pom</packaging>
     <version>1.1</version>
@@ -33,26 +33,26 @@
                 <version>${spark.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zhysunny</groupId>
+                <groupId>com.zhysunny.utils</groupId>
                 <artifactId>zhysunny-common</artifactId>
                 <version>${zhysunny.version}</version>
             </dependency>
             <!-- hive end -->
             <!-- shell start -->
             <dependency>
-                <groupId>com.zhysunny</groupId>
+                <groupId>com.zhysunny.utils</groupId>
                 <artifactId>zhysunny-net</artifactId>
                 <version>${zhysunny.version}</version>
             </dependency>
             <!-- shell end -->
             <!-- transfer start -->
             <dependency>
-                <groupId>com.zhysunny</groupId>
+                <groupId>com.zhysunny.utils</groupId>
                 <artifactId>zhysunny-io</artifactId>
                 <version>${zhysunny.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.zhysunny</groupId>
+                <groupId>com.zhysunny.utils</groupId>
                 <artifactId>zhysunny-driver</artifactId>
                 <version>${zhysunny.version}</version>
             </dependency>

@@ -118,13 +118,13 @@ public class Constants implements PropertiesConstant {
     /**
      * oracle输入表连接配置，driver，url，username，password
      */
-    @PropKey(key = "jdbc.connection.configs.input", defaultValue = "true")
+    @PropKey(key = "jdbc.connection.configs.input", classpath = "com.zhysunny.transfer.util.JdbcConfigTypeConversion")
     public static JdbcConfig JDBC_CONNECTION_CONFIGS_INPUT;
 
     /**
      * oracle输入表连接配置，driver，url，username，password
      */
-    @PropKey(key = "jdbc.connection.configs.output", defaultValue = "true")
+    @PropKey(key = "jdbc.connection.configs.output", classpath = "com.zhysunny.transfer.util.JdbcConfigTypeConversion")
     public static JdbcConfig JDBC_CONNECTION_CONFIGS_OUTPUT;
 
     /**
