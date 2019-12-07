@@ -41,6 +41,7 @@ public class XmlToJsonTest {
      */
     @Test
     public void testRead1() throws Exception {
+        Constants.XML_DATA_NODE_FROM = null;
         mapping = new XmlReader("example/xml/1/xml_to_xml.xml").read(Mapping.class);
         List<JSONObject> datas = (List<JSONObject>)new XmlReader(classLoader.getResource("example/xml/1/input.xml"))
         .read(new XmlToJson(mapping));
