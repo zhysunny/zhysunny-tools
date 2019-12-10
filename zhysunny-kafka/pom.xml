@@ -20,6 +20,14 @@
             <groupId>com.zhysunny.utils</groupId>
             <artifactId>zhysunny-io</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zhysunny.utils</groupId>
+            <artifactId>zhysunny-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
