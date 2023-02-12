@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zhysunny-driver</artifactId>
-    <name>Zhysunny Utils: Driver</name>
+    <name>Zhysunny Tools: Driver</name>
     <packaging>jar</packaging>
 
     <dependencies>
