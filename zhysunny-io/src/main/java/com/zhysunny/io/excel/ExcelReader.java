@@ -3,12 +3,19 @@ package com.zhysunny.io.excel;
 import com.zhysunny.io.BaseReader;
 import com.zhysunny.io.excel.reader.ExcelToMap;
 import com.zhysunny.io.exception.ExcelException;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.*;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +25,7 @@ import java.util.Map;
 
 /**
  * Excel读取类
+ *
  * @author 章云
  * @date 2019/7/25 17:41
  */
@@ -27,30 +35,37 @@ public class ExcelReader extends BaseReader implements Closeable {
      * 工作簿
      */
     private Workbook wb;
+
     /**
      * excel输入流
      */
     private InputStream is;
+
     /**
      * sheet对象
      */
     private Sheet sheet;
+
     /**
      * 第一行作为表头，记录的key值
      */
     private List<String> heads;
+
     /**
      * sheet数
      */
     private int sheetCount;
+
     /**
      * sheet名称
      */
     private String sheetName;
+
     /**
      * 总行数
      */
     private int rowCount;
+
     /**
      * 当前行数
      */
@@ -74,19 +89,19 @@ public class ExcelReader extends BaseReader implements Closeable {
             String filePath = "";
             Object resource = resources.get(0);
             if (resource instanceof URL) {
-                URL url = (URL)resource;
+                URL url = (URL) resource;
                 if (url != null) {
                     filePath = url.toString();
                     is = url.openStream();
                 }
             } else if (resource instanceof File) {
-                File file = (File)resource;
+                File file = (File) resource;
                 if (file.exists()) {
                     filePath = file.getName();
                     is = new FileInputStream(file);
                 }
             } else if (resource instanceof String) {
-                filePath = (String)resource;
+                filePath = (String) resource;
                 File file = new File(filePath);
                 URL url = Thread.currentThread().getContextClassLoader().getResource(filePath);
                 if (url != null) {
@@ -111,6 +126,7 @@ public class ExcelReader extends BaseReader implements Closeable {
 
     /**
      * 读取sheet索引并获取表头
+     *
      * @param sheetIndex sheet索引
      * @return
      */
@@ -159,6 +175,7 @@ public class ExcelReader extends BaseReader implements Closeable {
 
     /**
      * 读取正文数据
+     *
      * @return
      */
     public Map<String, String> readLine() {
@@ -208,6 +225,7 @@ public class ExcelReader extends BaseReader implements Closeable {
 
     /**
      * 获取总行数
+     *
      * @return
      */
     public int getRowCount() {
@@ -216,6 +234,7 @@ public class ExcelReader extends BaseReader implements Closeable {
 
     /**
      * 获取sheet总数
+     *
      * @return
      */
     public int getSheetCount() {
@@ -224,6 +243,7 @@ public class ExcelReader extends BaseReader implements Closeable {
 
     /**
      * 获取sheet名称
+     *
      * @return
      */
     public String getSheetName() {
@@ -255,27 +275,19 @@ public class ExcelReader extends BaseReader implements Closeable {
     private final String getStringCellValue(Cell cell) {
         String strCell = "";
         if (null != cell) {
-            switch (cell.getCellType()) {
-                case HSSFCell.CELL_TYPE_STRING:
-                    strCell = cell.getStringCellValue();
-                    break;
-                case HSSFCell.CELL_TYPE_NUMERIC:
-                    if (DateUtil.isCellDateFormatted(cell)) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        strCell = sdf.format(cell.getDateCellValue());
-                    } else {
-                        strCell = String.valueOf(cell.getNumericCellValue());
-                    }
-                    break;
-                case HSSFCell.CELL_TYPE_BOOLEAN:
-                    strCell = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                case HSSFCell.CELL_TYPE_BLANK:
-                    strCell = "";
-                    break;
-                default:
-                    strCell = "";
-                    break;
+            if (cell.getCellType() == CellType.STRING) {
+                strCell = cell.getStringCellValue();
+            } else if (cell.getCellType() == CellType.NUMERIC) {
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    strCell = sdf.format(cell.getDateCellValue());
+                } else {
+                    strCell = String.valueOf(cell.getNumericCellValue());
+                }
+            } else if (cell.getCellType() == CellType.BOOLEAN) {
+                strCell = String.valueOf(cell.getBooleanCellValue());
+            } else {
+                strCell = "";
             }
         }
         return cell == null || strCell == null ? "" : strCell;

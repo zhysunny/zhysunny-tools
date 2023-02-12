@@ -62,7 +62,7 @@ public class XmlWriter extends BaseWriter {
     }
 
     public void write(XmlBean bean) throws Exception {
-        write(bean, ENCODING);
+        write(bean, "UTF-8");
     }
 
 }

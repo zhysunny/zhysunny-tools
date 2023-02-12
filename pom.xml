@@ -4,11 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <artifactId>zhysunny-parent</artifactId>
+        <groupId>com.zhysunny.pom</groupId>
+        <version>1.0.1</version>
+    </parent>
+
     <groupId>com.zhysunny.tools</groupId>
     <artifactId>zhysunny-tools</artifactId>
     <packaging>pom</packaging>
     <version>1.1</version>
     <modules>
+        <module>zhysunny-utils</module>
+        <module>zhysunny-io</module>
+        <module>zhysunny-net</module>
+        <module>zhysunny-driver</module>
         <module>zhysunny-shell</module>
         <module>zhysunny-transfer</module>
         <module>zhysunny-hive</module>
@@ -16,147 +26,5 @@
     </modules>
     <name>Zhysunny Tools</name>
     <description>我的工具类</description>
-    <properties>
-        <jdk.version>1.8</jdk.version>
-        <scala.version>2.11</scala.version>
-        <spark.version>2.0.0</spark.version>
-        <kafka.version>0.9.0.1</kafka.version>
-        <zhysunny.version>1.1</zhysunny.version>
-        <compiler.encoding>UTF-8</compiler.encoding>
-        <argLine>-Dfile.encoding=UTF-8</argLine>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- hive start -->
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-hive_${scala.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zhysunny.utils</groupId>
-                <artifactId>zhysunny-common</artifactId>
-                <version>${zhysunny.version}</version>
-            </dependency>
-            <!-- hive end -->
-            <!-- kafka start -->
-            <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka_2.11</artifactId>
-                <version>${kafka.version}</version>
-            </dependency>
-            <!-- kafka end -->
-            <!-- shell start -->
-            <dependency>
-                <groupId>com.zhysunny.utils</groupId>
-                <artifactId>zhysunny-net</artifactId>
-                <version>${zhysunny.version}</version>
-            </dependency>
-            <!-- shell end -->
-            <!-- transfer start -->
-            <dependency>
-                <groupId>com.zhysunny.utils</groupId>
-                <artifactId>zhysunny-io</artifactId>
-                <version>${zhysunny.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zhysunny.utils</groupId>
-                <artifactId>zhysunny-driver</artifactId>
-                <version>${zhysunny.version}</version>
-            </dependency>
-            <!-- transfer end -->
-            <!-- junit start -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.7</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-core</artifactId>
-                <version>1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-library</artifactId>
-                <version>1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-api-mockito2</artifactId>
-                <version>2.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-module-junit4</artifactId>
-                <version>2.0.4</version>
-            </dependency>
-            <!-- junit end -->
-            <!-- json start -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.17</version>
-            </dependency>
-            <!-- json end -->
-            <!-- logger start -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.25</version>
-            </dependency>
-            <!-- logger end -->
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <!-- 编译插件 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <encoding>${compiler.encoding}</encoding>
-                </configuration>
-            </plugin>
-            <!-- 单元测试覆盖率 -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
-                <executions>
-                    <execution>
-                        <id>prepare-integration-tests</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

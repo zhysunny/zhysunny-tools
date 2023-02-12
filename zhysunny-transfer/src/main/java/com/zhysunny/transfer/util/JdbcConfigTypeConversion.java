@@ -2,7 +2,7 @@ package com.zhysunny.transfer.util;
 
 import com.zhysunny.driver.util.JdbcConfig;
 import com.zhysunny.io.properties.AbstractTypeConversion;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * String和JdbcConfig互转
