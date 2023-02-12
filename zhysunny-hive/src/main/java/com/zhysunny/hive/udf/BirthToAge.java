@@ -10,20 +10,19 @@ import java.util.Date;
 
 /**
  * 将生日转为年龄
+ *
  * @author 章云
  * @date 2019/11/13 15:51
  */
-@Description(
-    name = "to_age",
-    value = "_FUNC_(date[, format]) - Returns age",
-    extended = "Example:\n  > SELECT _FUNC_('1994-01-09') FROM src LIMIT 1;\n  25"
-)
+@Description(name = "to_age", value = "_FUNC_(date[, format]) - Returns age",
+        extended = "Example:\n  > SELECT _FUNC_('1994-01-09') FROM src LIMIT 1;\n  25")
 public class BirthToAge extends UDF {
 
     private final IntWritable result = new IntWritable();
 
     /**
      * 将生日转为年龄
+     *
      * @param date 默认yyyy-MM-dd
      * @return
      */

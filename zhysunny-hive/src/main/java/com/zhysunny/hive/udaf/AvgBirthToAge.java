@@ -10,9 +10,7 @@ import org.apache.hadoop.hive.ql.parse.SemanticException;
 import org.apache.hadoop.hive.ql.udf.generic.AbstractGenericUDAFResolver;
 import org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
-import org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
-import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorUtils;
 import org.apache.hadoop.hive.serde2.typeinfo.PrimitiveTypeInfo;
 import org.apache.hadoop.hive.serde2.typeinfo.TypeInfo;
 import org.apache.hadoop.io.DoubleWritable;
@@ -20,13 +18,11 @@ import java.text.ParseException;
 
 /**
  * 对生日字段取年龄的平均值
+ *
  * @author 章云
  * @date 2019/11/14 8:57
  */
-@Description(
-name = "avg_age",
-value = "_FUNC_(x) - Returns the mean of a set of birth"
-)
+@Description(name = "avg_age", value = "_FUNC_(x) - Returns the mean of a set of birth")
 public class AvgBirthToAge extends AbstractGenericUDAFResolver {
 
     static final Log LOG = LogFactory.getLog(AvgBirthToAge.class.getName());
@@ -37,14 +33,15 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
             throw new UDFArgumentTypeException(parameters.length - 1, "Exactly one argument is expected.");
         } else if (parameters[0].getCategory() != ObjectInspector.Category.PRIMITIVE) {
             throw new UDFArgumentTypeException(0,
-            "Only primitive type arguments are accepted but " + parameters[0].getTypeName() + " is passed.");
+                    "Only primitive type arguments are accepted but " + parameters[0].getTypeName() + " is passed.");
         } else {
-            switch (((PrimitiveTypeInfo)parameters[0]).getPrimitiveCategory()) {
+            switch (((PrimitiveTypeInfo) parameters[0]).getPrimitiveCategory()) {
                 case STRING:
                     return new GenericUDAFEvaluatorAvgBirthToAge();
                 default:
                     throw new UDFArgumentTypeException(0,
-                    "Only numeric or string type arguments are accepted but " + parameters[0].getTypeName() + " is passed.");
+                            "Only numeric or string type arguments are accepted but " + parameters[0].getTypeName()
+                                    + " is passed.");
             }
         }
     }
@@ -52,6 +49,7 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
     private static class GenericUDAFEvaluatorAvgBirthToAge extends GenericUDAFEvaluator {
 
         private BirthToAge birthToAge = new BirthToAge();
+
         private DoubleWritable result = new DoubleWritable(10.0);
 
         @Override
@@ -62,6 +60,7 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
 
         /**
          * 创建新的AverageAgg对象
+         *
          * @return
          * @throws HiveException
          */
@@ -74,18 +73,20 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
 
         /**
          * 初始化AverageAgg
+         *
          * @param aggregationBuffer
          * @throws HiveException
          */
         @Override
         public void reset(AggregationBuffer aggregationBuffer) throws HiveException {
-            AverageAgg averageAgg = (AverageAgg)aggregationBuffer;
+            AverageAgg averageAgg = (AverageAgg) aggregationBuffer;
             averageAgg.count = 0;
             averageAgg.sum = 0.0;
         }
 
         /**
          * map阶段调用，只要把保存当前和的对象agg，再加上输入的参数，就可以了。
+         *
          * @param aggregationBuffer
          * @param objects
          * @throws HiveException
@@ -103,7 +104,7 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
         @Override
         public void merge(AggregationBuffer aggregationBuffer, Object partial) throws HiveException {
             if (partial != null) {
-                AverageAgg averageAgg = (AverageAgg)aggregationBuffer;
+                AverageAgg averageAgg = (AverageAgg) aggregationBuffer;
                 try {
                     averageAgg.sum += birthToAge.evaluate(partial.toString()).get();
                 } catch (ParseException e) {
@@ -115,7 +116,7 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
 
         @Override
         public Object terminate(AggregationBuffer aggregationBuffer) throws HiveException {
-            AverageAgg averageAgg = (AverageAgg)aggregationBuffer;
+            AverageAgg averageAgg = (AverageAgg) aggregationBuffer;
             double value = averageAgg.sum / averageAgg.count;
             result.set(averageAgg.count);
             return result;
@@ -124,15 +125,14 @@ public class AvgBirthToAge extends AbstractGenericUDAFResolver {
         /**
          * 用于存储avg的数据
          */
-        @AggregationType(
-        estimable = true
-        )
+        @AggregationType(estimable = true)
         static class AverageAgg extends AbstractAggregationBuffer {
 
             /**
              * 数据个数
              */
             long count;
+
             /**
              * 数据总和
              */
