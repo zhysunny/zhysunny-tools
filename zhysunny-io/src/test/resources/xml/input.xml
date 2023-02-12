@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Topics>
+    <Topic name="COMMON">
+        <Filter>
+            <Column key="content" value="\u62A5\u6848"/>
+        </Filter>
+        <Regex>
+            <Column name="carnumber" key="content" regexName="CAR" groupName="carNum" notNull="true"/>
+            <Column name="insurance" key="content" regexName="BRACKET" groupName="bracket_en,bracket_zh"/>
+            <Column name="banumber1" key="content" value="((\u62A5\u6848((\u5C3E)?\u53F7)?)|(\u4E8B\u6545\u53F7))(\uFF1A|\u4E3A|:)?[A-Z0-9\-]{1,}"/>
+            <Column name="banumber" key="banumber1" value="[A-Z0-9\-]+"/>
+            <Column name="bdnumber1" key="content" value="\u4FDD\u5355\u53F7\uFF1A(\d){7,}"/>
+            <Column name="bdnumber" key="bdnumber1" value="\d{7,}"/>
+            <Column name="area" key="content"
+                    value="((?&lt;=\u5728)[\u4E00-\u9FA5\w\s\d\(\)/\-]+(?=\u51FA\u9669))|((?&lt;=\u51FA\u9669\u5730\u4F4D\u4E8E)[\u4E00-\u9FA5\s\d\(\)/\-]+)"/>
+            <Column name="date" key="content" regexName="DATE_TIME" groupName="date"/>
+            <Column name="people" key="content" regexName="PERSON_NAME" groupName="name_insurance"/>
+            <Column name="money" key="content" regexName="NUMBER" groupName="money_deal"/>
+        </Regex>
+        <Translate>
+            <Column name="insuranceType" key="insurance" value="insuranceType"/>
+            <Column name="date" key="date" value="date" notNull="true"/>
+            <Column name="area" key="area" value="replaceall" ref="\s"/>
+            <Column name="people" key="people" value="replaceall" ref="客户|联系"/>
+            <Column name="money" key="money" value="replaceall" ref=",|，"/>
+        </Translate>
+    </Topic>
+</Topics>
