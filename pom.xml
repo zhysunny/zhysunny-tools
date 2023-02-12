@@ -23,6 +23,8 @@
         <module>zhysunny-transfer</module>
         <module>zhysunny-hive</module>
         <module>zhysunny-kafka</module>
+        <module>zhysunny-rest</module>
+        <module>zhysunny-commons</module>
     </modules>
     <name>Zhysunny Tools</name>
     <description>我的工具类</description>
