@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- oracle -->
+<!-- 属性值有 name type length primaryKey notNull comment -->
+<!-- name值在实际建表时会使用大写 必填 -->
+<!-- type值兼容oracle，java数据类型 必填 -->
+<!-- length有对应type的默认值 可选 -->
+<!-- primaryKey主键 可选 只能选一个字段 -->
+<!-- notNull字段是否必填 可选 primaryKey字段默认必填 -->
+<!-- comment字段说明，暂时无用 可选 -->
+<Table>
+    <Column name="id" type="int" primaryKey="true" comment="ID"/>
+    <Column name="name" type="string" length="8" notNull="true" comment="姓名"/>
+    <Column name="age" type="number" comment="年龄"/>
+    <Column name="birth" type="date" comment="生日"/>
+    <Column name="test" type="int" comment="记录的时间戳"/>
+</Table>
