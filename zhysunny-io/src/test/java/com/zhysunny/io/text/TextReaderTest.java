@@ -1,11 +1,11 @@
 package com.zhysunny.io.text;
 
-import static org.junit.Assert.*;
-
-import com.zhysunny.io.excel.ExcelReaderTest;
 import com.zhysunny.io.text.bean.Person;
-import org.junit.*;
-
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -13,12 +13,14 @@ import java.util.Map;
 
 /**
  * TextReader Test.
+ *
  * @author 章云
  * @date 2019/7/26 11:18
  */
 public class TextReaderTest {
 
     private String resource;
+
     private String path;
 
     @BeforeClass
