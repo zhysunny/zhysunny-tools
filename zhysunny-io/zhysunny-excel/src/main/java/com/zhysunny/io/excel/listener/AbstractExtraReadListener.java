@@ -3,7 +3,6 @@ package com.zhysunny.io.excel.listener;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.CellData;
 import com.alibaba.excel.metadata.CellExtra;
-import com.alibaba.excel.read.listener.ReadListener;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,10 @@ import java.util.Map;
  * @date 2023/3/12 9:52
  */
 @Slf4j
-public class DefaultReadListener<T> implements ReadListener<T> {
+public abstract class AbstractExtraReadListener<T> implements ISheetReader<T> {
     private List<T> dataList = new ArrayList<>();
+
+    private int extraIndex = 0;
 
     @Override
     public void onException(Exception e, AnalysisContext analysisContext) throws Exception {
@@ -25,6 +26,7 @@ public class DefaultReadListener<T> implements ReadListener<T> {
     @Override
     public void invokeHead(Map<Integer, CellData> map, AnalysisContext analysisContext) {
         dataList.clear();
+        extraIndex = 0;
     }
 
     @Override
@@ -34,7 +36,19 @@ public class DefaultReadListener<T> implements ReadListener<T> {
 
     @Override
     public void extra(CellExtra cellExtra, AnalysisContext analysisContext) {
-
+        String text = cellExtra.getText();
+        switch (cellExtra.getType()) {
+            case COMMENT:
+                log.info("批注内容:{}", text);
+                break;
+            case HYPERLINK:
+                log.info("超链接内容:{}", text);
+                break;
+            case MERGE:
+                log.info("合并单元格索引");
+                break;
+        }
+        extraIndex++;
     }
 
     @Override
@@ -47,6 +61,7 @@ public class DefaultReadListener<T> implements ReadListener<T> {
         return true;
     }
 
+    @Override
     public List<T> getDataList() {
         return dataList;
     }

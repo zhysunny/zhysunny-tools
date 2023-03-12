@@ -11,24 +11,21 @@ import com.alibaba.excel.read.listener.ReadListener;
 public class EasyExcelReader<T> {
     private final String excelName;
 
-    private final ReadListener readListener;
-
-    public EasyExcelReader(String excelName, ReadListener readListener) {
+    public EasyExcelReader(String excelName) {
         this.excelName = excelName;
-        this.readListener = readListener;
     }
 
-    public void readSheet(Class<T> clazz) {
-        readSheet(clazz, 0);
+    public void readSheet(Class<T> clazz, ReadListener readListener) {
+        readSheet(clazz, readListener, 0);
     }
 
-    public void readSheet(Class<T> clazz, int sheetNo) {
-        EasyExcel.read(this.excelName, clazz, this.readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
+    public void readSheet(Class<T> clazz, ReadListener readListener, int sheetNo) {
+        EasyExcel.read(this.excelName, clazz, readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
                 .extraRead(CellExtraTypeEnum.COMMENT).sheet(sheetNo).doRead();
     }
 
-    public void readSheet(Class<T> clazz, String sheetName) {
-        EasyExcel.read(this.excelName, clazz, this.readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
+    public void readSheet(Class<T> clazz, ReadListener readListener, String sheetName) {
+        EasyExcel.read(this.excelName, clazz, readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
                 .extraRead(CellExtraTypeEnum.COMMENT).sheet(sheetName).doRead();
     }
 
