@@ -8,7 +8,7 @@ import java.util.List;
  * @date 2023/3/12 10:22
  */
 public class PowerExcelWriter {
-    public static void writer(String excelName, List<ISheetWriter> sheetWriters) {
+    public static void writer(String excelName, List<? extends ISheetWriter> sheetWriters) {
         EasyExcelWriter writer = new EasyExcelWriter(excelName);
 
         for (ISheetWriter sheetWriter : sheetWriters) {

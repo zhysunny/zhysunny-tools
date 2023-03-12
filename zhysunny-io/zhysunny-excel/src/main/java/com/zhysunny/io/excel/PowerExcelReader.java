@@ -8,7 +8,7 @@ import java.util.List;
  * @date 2023/3/12 10:22
  */
 public class PowerExcelReader {
-    public static void reader(String excelName, List<ISheetReader> sheetReaders) {
+    public static void reader(String excelName, List<? extends ISheetReader> sheetReaders) {
         EasyExcelReader reader = new EasyExcelReader(excelName);
 
         for (ISheetReader sheetReader : sheetReaders) {

@@ -11,6 +11,8 @@ import java.util.Set;
  */
 public class ModelData {
 
+    public static final String EXCEL_NAME = "test.xlsx";
+
     public static List<ModelSheet1> getSheet1() {
         List<ModelSheet1> data = new ArrayList<>();
         data.add(new ModelSheet1("张三", 20));
@@ -27,7 +29,7 @@ public class ModelData {
         return data;
     }
 
-    public static boolean equals(List<ModelSheet> data1, List<ModelSheet> data2) {
+    public static boolean equals(List<? extends ModelSheet> data1, List<? extends ModelSheet> data2) {
         if (data1 == null || data2 == null) {
             return false;
         }

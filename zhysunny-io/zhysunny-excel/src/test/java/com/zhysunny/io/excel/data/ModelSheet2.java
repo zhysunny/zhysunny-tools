@@ -1,7 +1,10 @@
 package com.zhysunny.io.excel.data;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.Objects;
 
 /**
@@ -10,12 +13,18 @@ import java.util.Objects;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ModelSheet2 implements ModelSheet {
-
+    @ColumnWidth(6)
+    @ExcelProperty("姓名")
     private String name;
 
+    @ColumnWidth(9)
+    @ExcelProperty({"收入", "主收入"})
     private Integer mainIncome;
 
+    @ColumnWidth(9)
+    @ExcelProperty({"收入", "副收入"})
     private Integer secondaryIncome;
 
     @Override
