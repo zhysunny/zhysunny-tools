@@ -11,7 +11,10 @@
 
     <artifactId>zhysunny-io</artifactId>
     <name>Zhysunny Tools: IO</name>
-    <packaging>jar</packaging>
+    <modules>
+        <module>zhysunny-excel</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <dependencies>
         <!-- io start -->
