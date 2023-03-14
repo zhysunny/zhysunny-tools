@@ -31,13 +31,6 @@ public class PowerExcel {
 
     @Before
     public void before() throws Exception {
-        System.out.println("Write Excel Start...");
-        List<AbstractSheetWriter> sheetWriters = new ArrayList<>();
-        sheetWriters.add(new Sheet1Writer());
-        sheetWriters.add(new Sheet2Writer());
-
-        PowerExcelWriter.writer(ModelData.EXCEL_NAME, sheetWriters);
-        Thread.sleep(3000);
     }
 
     @After
@@ -52,10 +45,18 @@ public class PowerExcel {
     }
 
     /**
-     * Method: reader(String excelName, List<ISheetReader> sheetReaders)
+     * Method: read(String excelName, List<ISheetReader> sheetReaders)
      */
     @Test
     public void testReader() throws Exception {
+        System.out.println("Write Excel Start...");
+        List<AbstractSheetWriter> sheetWriters = new ArrayList<>();
+        sheetWriters.add(new Sheet1Writer());
+        sheetWriters.add(new Sheet2Writer());
+
+        PowerExcelWriter.write(sheetWriters);
+        Thread.sleep(3000);
+
         System.out.println("Read Excel Start...");
         List<AbstractReadListener> readListeners = new ArrayList<>();
         Sheet1Reader sheet1Reader = new Sheet1Reader();
@@ -63,7 +64,7 @@ public class PowerExcel {
         Sheet2Reader sheet2Reader = new Sheet2Reader();
         readListeners.add(sheet2Reader);
 
-        PowerExcelReader.reader(ModelData.EXCEL_NAME, readListeners);
+        PowerExcelReader.read(readListeners);
 
         List<ModelSheet1> data1List = sheet1Reader.getDataList();
         assertThat(ModelData.equals(ModelData.getSheet1(), data1List)).isTrue();

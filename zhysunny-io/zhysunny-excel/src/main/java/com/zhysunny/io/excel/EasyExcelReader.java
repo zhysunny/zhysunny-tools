@@ -21,12 +21,12 @@ public class EasyExcelReader<T> {
 
     public void readSheet(Class<T> clazz, ReadListener readListener, int sheetNo) {
         EasyExcel.read(this.excelName, clazz, readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
-                .extraRead(CellExtraTypeEnum.COMMENT).sheet(sheetNo).doRead();
+                .extraRead(CellExtraTypeEnum.MERGE).sheet(sheetNo).doRead();
     }
 
     public void readSheet(Class<T> clazz, ReadListener readListener, String sheetName) {
         EasyExcel.read(this.excelName, clazz, readListener).extraRead(CellExtraTypeEnum.HYPERLINK)
-                .extraRead(CellExtraTypeEnum.COMMENT).sheet(sheetName).doRead();
+                .extraRead(CellExtraTypeEnum.MERGE).sheet(sheetName).doRead();
     }
 
 }

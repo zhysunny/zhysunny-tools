@@ -29,10 +29,18 @@ public abstract class AbstractReadListener<T> implements ISheetReader<T> {
     @Override
     public void invoke(T t, AnalysisContext analysisContext) {
         dataList.add(t);
+        if (dataList.size() >= getBatch()) {
+            handle();
+            dataList.clear();
+        }
     }
 
     @Override
     public void extra(CellExtra cellExtra, AnalysisContext analysisContext) {
+        if (dataList.size() > 0) {
+            handle();
+            dataList.clear();
+        }
     }
 
     @Override
@@ -49,4 +57,8 @@ public abstract class AbstractReadListener<T> implements ISheetReader<T> {
         return dataList;
     }
 
+    @Override
+    public void handle() {
+
+    }
 }

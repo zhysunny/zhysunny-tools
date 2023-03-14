@@ -20,11 +20,6 @@ public class Sheet1Writer extends AbstractSheetWriter<ModelSheet1> {
     }
 
     @Override
-    public int getSheetNo() {
-        return 1;
-    }
-
-    @Override
     public String getSheetName() {
         return "sheet1";
     }

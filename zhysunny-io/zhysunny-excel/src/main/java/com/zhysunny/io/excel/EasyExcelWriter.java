@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
+import com.zhysunny.io.excel.writer.DefaultWriterHandler;
 import java.util.List;
 
 /**
@@ -17,11 +18,13 @@ public class EasyExcelWriter<T> {
 
     private WriteTable writeTable;
 
+    private static final DefaultWriterHandler DEFAULT_WRITER_HANDLER = new DefaultWriterHandler();
+
     public EasyExcelWriter(String excelName) {
-        this.excelWriter = EasyExcel.write(excelName).build();
+        this.excelWriter = EasyExcel.write(excelName).registerWriteHandler(DEFAULT_WRITER_HANDLER).build();
     }
 
-    public EasyExcelWriter writerSheet(int sheetNo, String sheetName) {
+    public EasyExcelWriter writerSheet(Integer sheetNo, String sheetName) {
         this.writeSheet = EasyExcel.writerSheet(sheetNo, sheetName).needHead(false).build();
         return this;
     }

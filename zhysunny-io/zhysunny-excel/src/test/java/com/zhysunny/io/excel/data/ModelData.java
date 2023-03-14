@@ -23,9 +23,9 @@ public class ModelData {
 
     public static List<ModelSheet2> getSheet2() {
         List<ModelSheet2> data = new ArrayList<>();
-        data.add(new ModelSheet2("张三", 20000, 3000));
-        data.add(new ModelSheet2("李四", 5000, 30000));
-        data.add(new ModelSheet2("王五", 25000, 0));
+        data.add(new ModelSheet2("张三", 1000, 1000));
+        data.add(new ModelSheet2("李四", 1000, 1000));
+        data.add(new ModelSheet2("王五", 1000, 1000));
         return data;
     }
 

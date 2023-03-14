@@ -1,5 +1,6 @@
 package com.zhysunny.io.excel.reader;
 
+import com.zhysunny.io.excel.data.ModelData;
 import com.zhysunny.io.excel.data.ModelSheet2;
 import com.zhysunny.io.excel.listener.AbstractReadListener;
 
@@ -17,5 +18,10 @@ public class Sheet2Reader extends AbstractReadListener<ModelSheet2> {
     @Override
     public Object getSheetNoOrName() {
         return 1;
+    }
+
+    @Override
+    public String getExcelName() {
+        return ModelData.EXCEL_NAME;
     }
 }
