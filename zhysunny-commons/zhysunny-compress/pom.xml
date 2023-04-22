@@ -11,5 +11,11 @@
 
     <artifactId>zhysunny-compress</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
