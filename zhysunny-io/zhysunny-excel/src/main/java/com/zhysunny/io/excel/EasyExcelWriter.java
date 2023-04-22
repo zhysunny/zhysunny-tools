@@ -2,6 +2,7 @@ package com.zhysunny.io.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.handler.WriteHandler;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
 import com.zhysunny.io.excel.writer.DefaultWriterHandler;
@@ -21,7 +22,14 @@ public class EasyExcelWriter<T> {
     private static final DefaultWriterHandler DEFAULT_WRITER_HANDLER = new DefaultWriterHandler();
 
     public EasyExcelWriter(String excelName) {
-        this.excelWriter = EasyExcel.write(excelName).registerWriteHandler(DEFAULT_WRITER_HANDLER).build();
+        this(excelName, null);
+    }
+
+    public EasyExcelWriter(String excelName, WriteHandler writeHandler) {
+        if (writeHandler == null) {
+            writeHandler = DEFAULT_WRITER_HANDLER;
+        }
+        this.excelWriter = EasyExcel.write(excelName).registerWriteHandler(writeHandler).build();
     }
 
     public EasyExcelWriter writerSheet(Integer sheetNo, String sheetName) {

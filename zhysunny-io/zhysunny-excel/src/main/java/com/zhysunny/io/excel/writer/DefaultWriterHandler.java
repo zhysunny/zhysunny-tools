@@ -32,35 +32,43 @@ public class DefaultWriterHandler extends AbstractRowWriteHandler {
             // 克隆当前的样式
             cellStyle.cloneStyleFrom(cell.getCellStyle());
             cell.setCellStyle(cellStyle);
+            setCellStyle(writeSheetHolder, isHead, cell, cellStyle);
             // 设置字体
             Font font = writeSheetHolder.getSheet().getWorkbook().createFont();
             cellStyle.setFont(font);
-            if (isHead) {
-                font.setFontHeight((short) (14 * 20));
-                font.setBold(true);
-            } else {
-                font.setFontHeight((short) (12 * 20));
-            }
-            font.setFontName("微软雅黑");
-            // 设置边框
-            cellStyle.setBorderBottom(BorderStyle.THIN);
-            cellStyle.setBorderTop(BorderStyle.THIN);
-            cellStyle.setBorderLeft(BorderStyle.THIN);
-            cellStyle.setBorderRight(BorderStyle.THIN);
-            // 自动换行
-            cellStyle.setWrapText(true);
-            // 超链接
-            String stringCellValue = cell.getCellType() == CellType.STRING ? cell.getStringCellValue() : "";
-            if (stringCellValue != null && (stringCellValue.startsWith("http://") || stringCellValue
-                    .startsWith("https://"))) {
-                CreationHelper creationHelper = writeSheetHolder.getSheet().getWorkbook().getCreationHelper();
-                Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
-                hyperlink.setAddress(stringCellValue);
-                cell.setHyperlink(hyperlink);
-                // 超链接样式
-                font.setUnderline((byte) 1);
-                font.setColor(IndexedColors.BLUE.getIndex());
-            }
+            setFront(writeSheetHolder, isHead, cell, font);
         });
+    }
+
+    public void setFront(WriteSheetHolder writeSheetHolder, Boolean isHead, Cell cell, Font font) {
+        if (isHead) {
+            font.setFontHeight((short) (14 * 20));
+            font.setBold(true);
+        } else {
+            font.setFontHeight((short) (12 * 20));
+        }
+        font.setFontName("微软雅黑");
+        // 超链接
+        String stringCellValue = cell.getCellType() == CellType.STRING ? cell.getStringCellValue() : "";
+        if (stringCellValue != null && (stringCellValue.startsWith("http://") || stringCellValue
+                .startsWith("https://"))) {
+            CreationHelper creationHelper = writeSheetHolder.getSheet().getWorkbook().getCreationHelper();
+            Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.URL);
+            hyperlink.setAddress(stringCellValue);
+            cell.setHyperlink(hyperlink);
+            // 超链接样式
+            font.setUnderline((byte) 1);
+            font.setColor(IndexedColors.BLUE.getIndex());
+        }
+    }
+
+    public void setCellStyle(WriteSheetHolder writeSheetHolder, Boolean isHead, Cell cell, CellStyle cellStyle) {
+        // 设置边框
+        cellStyle.setBorderBottom(BorderStyle.THIN);
+        cellStyle.setBorderTop(BorderStyle.THIN);
+        cellStyle.setBorderLeft(BorderStyle.THIN);
+        cellStyle.setBorderRight(BorderStyle.THIN);
+        // 自动换行
+        cellStyle.setWrapText(true);
     }
 }
