@@ -1,7 +1,7 @@
 package com.zhysunny.commons.compress.impl;
 
 import com.zhysunny.commons.compress.Compress;
-import com.zhysunny.commons.compress.TarArchiveEntryReader;
+import com.zhysunny.commons.compress.ZipEntryReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +14,7 @@ import java.util.zip.ZipOutputStream;
  * @author zhysunny
  * @date 2020/8/10 23:33
  */
-public class ZipCompress implements Compress {
+public class ZipCompress implements Compress<ZipEntryReader> {
 
     @Override
     public String compress(String content) throws IOException {
@@ -32,7 +32,7 @@ public class ZipCompress implements Compress {
     }
 
     @Override
-    public void decompress(String encode, List<TarArchiveEntryReader> readers) {
+    public void decompress(String encode, List<ZipEntryReader> readers) {
 
     }
 }

@@ -19,7 +19,7 @@ import java.util.zip.GZIPOutputStream;
  * @author zhysunny
  * @date 2023/4/22 9:54
  */
-public class GzipCompress implements Compress {
+public class GzipCompress implements Compress<TarArchiveEntryReader> {
     @Override
     public String compress(String content) throws IOException {
         String filename = System.currentTimeMillis() + ".txt";
